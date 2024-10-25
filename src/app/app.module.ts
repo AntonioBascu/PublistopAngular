@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { PaymentDetailFormComponent } from './payment-details/payment-detail-form/payment-detail-form.component';
 import { provideHttpClient } from '@angular/common/http';
+import { ArticuloDetailsComponent } from './articulo-details/articulo-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PaymentDetailsComponent,
-    PaymentDetailFormComponent
+    PaymentDetailFormComponent,
+    ArticuloDetailsComponent
   ],
   imports: [
     BrowserModule,

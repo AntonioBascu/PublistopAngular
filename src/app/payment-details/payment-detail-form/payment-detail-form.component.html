@@ -1,1 +1,41 @@
-<p>payment-details works!</p>
+<form #form="ngForm" (submit)="onSubmit(form)">
+    <div class="mb-3">
+        <input type="hidden" name="id" [value]="service.DatosFormulario.id" />
+        <label>Nombre del propietario de la tarjeta</label>
+        <input class="form-control form-control-lg"
+               placeholder="Nombre en la tarjeta"
+               #nombrePropietarioTarjeta="ngModel"
+               name="nombrePropietarioTarjeta"
+               [(ngModel)]="service.DatosFormulario.nombrePropietarioTarjeta" required/>
+    </div>
+    <div class="mb-3">
+        <label>Numero de tarjeta</label>
+        <input class="form-control form-control-lg"
+               placeholder="Numero de tarjeta de 16 dígitos"
+               #numeroTarjeta="ngModel"
+               name="numeroTarjeta"
+               [(ngModel)]="service.DatosFormulario.numeroTarjeta" required maxlength="16" minlength="16"/>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-6">
+            <label>Codigo de seguridad</label>
+            <input class="form-control form-control-lg"
+                   type="password"
+                   placeholder="CVV"
+                   #codigoSeguridad="ngModel"
+                   name="codigoSeguridad"
+                   [(ngModel)]="service.DatosFormulario.codigoSeguridad" required maxlength="3" minlength="3" />
+        </div>
+        <div class="mb-3 col-6">
+            <label>Válido hasta</label>
+            <input class="form-control form-control-lg"
+                   placeholder="MM/YY"
+                   #fechaCaducidad="ngModel"
+                   name="fechaCaducidad"
+                   [(ngModel)]="service.DatosFormulario.fechaCaducidad" required maxlength="5" minlength="5" />
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-lg btn-success" type="submit">Confirmar</button>
+        </div>
+    </div>
+</form>

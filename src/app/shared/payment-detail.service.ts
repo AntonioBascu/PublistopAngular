@@ -10,6 +10,7 @@ export class PaymentDetailService {
 
   url: string = environment.apiUrl + '/Pagos'
   pagos: Pago[] = []
+  DatosFormulario: Pago = new Pago()
 
   constructor(private http: HttpClient) { }
 
@@ -20,5 +21,10 @@ export class PaymentDetailService {
         next: res => { this.pagos = res as Pago[] },
         error: err => { console.log(err) }
       })
+  }
+
+  postPago()
+  {
+    return this.http.post(this.url, this.DatosFormulario)
   }
 }

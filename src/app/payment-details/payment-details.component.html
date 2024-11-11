@@ -7,14 +7,15 @@
   </div>
   <div class="col-6">
     <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-start mb-2 border px-4 py-3 rounded-3" *ngFor="let pago of service.pagos">
-        <div class="flex-grow-1 mouse-hover">
-          <div class="fw-bold"> {{pago.nombrePropietarioTarjeta}} </div>
-          <div> {{pago.numeroTarjeta}} </div>
-          <div class="fw-bold"> {{pago.fechaCaducidad}} </div>
-        </div>
+      <li class="list-group-item d-flex justify-content-between align-items-start mb-2 border px-4 py-3 rounded-3"
+        *ngFor="let pago of service.pagos">
+          <div class="flex-grow-1 mouse-hover" (click)="rellenarFormulario(pago)">
+              <div class="fw-bold"> {{pago.nombrePropietarioTarjeta}} </div>
+              <div> {{pago.numeroTarjeta}} </div>
+              <div class="fw-bold"> {{pago.fechaCaducidad}} </div>
+          </div>
         <span class="text-secondary">
-          <i class="fa-solid fa-trash fa-lg mouse-hover"></i>
+          <i class="fa-solid fa-trash fa-lg mouse-hover" (click)="eliminar(pago.id)"></i>
         </span>
       </li>
     </ul>

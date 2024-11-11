@@ -27,4 +27,12 @@ export class PaymentDetailService {
   {
     return this.http.post(this.url, this.DatosFormulario)
   }
+
+  putPago() {
+    return this.http.put(this.url + '/' + this.DatosFormulario.id, this.DatosFormulario)
+  }
+
+  deletePago(id: number) {
+    return this.http.delete(this.url + '/' + id);
+  }
 }

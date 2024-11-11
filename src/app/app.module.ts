@@ -11,13 +11,17 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
 import { PaymentDetailFormComponent } from './payment-details/payment-detail-form/payment-detail-form.component';
 import { ArticuloDetailsComponent } from './articulo-details/articulo-details.component';
 import { FormsModule } from '@angular/forms';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { RegistroComponent } from './usuario/registro/registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PaymentDetailsComponent,
     PaymentDetailFormComponent,
-    ArticuloDetailsComponent
+    ArticuloDetailsComponent,
+    UsuarioComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,

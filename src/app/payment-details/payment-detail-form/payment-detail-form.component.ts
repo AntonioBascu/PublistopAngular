@@ -10,25 +10,49 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './payment-detail-form.component.css'
 })
 export class PaymentDetailFormComponent {
+
+  enviado: Boolean = false;
+
   constructor(public service: PaymentDetailService, private toastr: ToastrService) { }
 
   onSubmit(form: NgForm) {
 
+    this.enviado = true;
     if (form.valid) {
-      this.service.postPago()
-        .subscribe({
-          next: res => {
-            this.service.pagos = res as Pago[];
-            this.resetearFormulario(form);
-            this.toastr.success('¡Pago creado con éxito!', 'Registro de pagos');
-          },
-          error: err => { console.log(err) }
-        })
+      if (this.service.DatosFormulario.id == 0)
+        this.insertarDatos(form)
+      else
+        this.actualizarDatos(form)
     }
+  }
+
+  insertarDatos(form: NgForm) {
+    this.service.postPago()
+      .subscribe({
+        next: res => {
+          this.service.pagos = res as Pago[];
+          this.resetearFormulario(form);
+          this.toastr.success('¡Pago creado con éxito!', 'Registro de pagos');
+        },
+        error: err => { console.log(err) }
+      })
+  }
+
+  actualizarDatos(form: NgForm) {
+    this.service.putPago()
+      .subscribe({
+        next: res => {
+          this.service.pagos = res as Pago[];
+          this.resetearFormulario(form);
+          this.toastr.info('¡Pago actualizado con éxito!', 'Registro de pagos');
+        },
+        error: err => { console.log(err) }
+      })
   }
 
   resetearFormulario(form: NgForm) {
     form.form.reset();
     this.service.DatosFormulario = new Pago();
+    this.enviado = false;
   }
 }

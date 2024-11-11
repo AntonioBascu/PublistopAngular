@@ -1,4 +1,4 @@
-<form #form="ngForm" (submit)="onSubmit(form)">
+<form #form="ngForm" (submit)="onSubmit(form)" [class.submitted]="this.enviado">
     <div class="mb-3">
         <input type="hidden" name="id" [value]="service.DatosFormulario.id" />
         <label>Nombre del propietario de la tarjeta</label>

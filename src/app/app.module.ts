@@ -1,34 +1,46 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
+//app
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
-import { PaymentDetailsComponent } from './payment-details/payment-details.component';
-import { PaymentDetailFormComponent } from './payment-details/payment-detail-form/payment-detail-form.component';
-import { ArticuloDetailsComponent } from './articulo-details/articulo-details.component';
-import { FormsModule } from '@angular/forms';
+import { PagoComponent } from './pago/pago.component';
+import { FormularioPagoComponent } from './pago/formulario-pago/formulario-pago.component';
+import { ArticuloComponent } from './articulo/articulo.component';
 import { UsuarioComponent } from './usuario/usuario.component';
-import { RegistroComponent } from './usuario/registro/registro.component';
+import { FormularioRegistroComponent } from './usuario/formulario-registro/formulario-registro.component';
+import { MenuComponent } from './layout/menu/menu.component';
+
+//Angular material
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PaymentDetailsComponent,
-    PaymentDetailFormComponent,
-    ArticuloDetailsComponent,
+    PagoComponent,
+    FormularioPagoComponent,
+    ArticuloComponent,
     UsuarioComponent,
-    RegistroComponent
+    FormularioRegistroComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    FormsModule
+    FormsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

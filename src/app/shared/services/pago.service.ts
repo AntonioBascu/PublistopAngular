@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.development';
-import { Pago } from './payment-detail.model';
+import { environment } from '../../../environments/environment.development';
+import { Pago } from '../models/pago.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentDetailService {
+export class PagoService {
 
   url: string = environment.apiUrl + '/Pagos'
   pagos: Pago[] = []

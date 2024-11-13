@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import { PaymentDetailService } from '../../shared/payment-detail.service';
+import { PagoService } from '../../shared/services/pago.service';
 import { NgForm } from '@angular/forms';
-import { Pago } from '../../shared/payment-detail.model';
+import { Pago } from '../../shared/models/pago.model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-payment-detail-form',
-  templateUrl: './payment-detail-form.component.html',
-  styleUrl: './payment-detail-form.component.css'
+  selector: 'app-formulario-pago',
+  templateUrl: './formulario-pago.component.html',
+  styleUrl: './formulario-pago.component.css'
 })
-export class PaymentDetailFormComponent {
+export class FormularioPagoComponent {
 
   enviado: Boolean = false;
 
-  constructor(public service: PaymentDetailService, private toastr: ToastrService) { }
+  constructor(public service: PagoService, private toastr: ToastrService) { }
 
   onSubmit(form: NgForm) {
 

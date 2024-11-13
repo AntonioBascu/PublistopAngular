@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { PaymentDetailService } from '../shared/payment-detail.service';
-import { Pago } from '../shared/payment-detail.model';
+import { PagoService } from '../shared/services/pago.service';
+import { Pago } from '../shared/models/pago.model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-payment-details',
-  templateUrl: './payment-details.component.html',
-  styleUrl: './payment-details.component.css'
+  selector: 'app-pago',
+  templateUrl: './pago.component.html',
+  styleUrl: './pago.component.css'
 })
-export class PaymentDetailsComponent implements OnInit {
+export class PagoComponent implements OnInit {
 
-  constructor(public service: PaymentDetailService, private toastr: ToastrService) { }
+  constructor(public service: PagoService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.service.getPagos();

@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <span>Publistop</span>
+
+    <span class="spacer"></span>
+
+    <button mat-button routerLink="/usuario" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+        Usuario
+    </button>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/articulo" routerLinkActive="active">Articulos</button>
+    <button mat-menu-item routerLink="/pagos" routerLinkActive="active">Pagos</button>
+    <button mat-menu-item routerLink="/contact" routerLinkActive="active">Contacto</button>
+</mat-menu>

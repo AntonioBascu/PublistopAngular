@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-registro',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrl: './formulario-registro.component.css'
 })
 export class FormularioRegistroComponent {
+  constructor() { }
+  public  formBuilder = inject(FormBuilder);
+
+  form = this.formBuilder.group({
+    nombre: [''],
+    email: [''],
+    password: [''],
+    confirmarPassword: ['']
+  })
+
+  onSubmit() {
+    console.log(this.form.value)
+  }
 
 }

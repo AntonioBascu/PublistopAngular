@@ -1,1 +1,22 @@
-<p>registro works!</p>
+<div class="mb-4 h2 text-success">
+    Crear cuenta
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="Nombre completo" formControlName="nombre" />
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="Email" formControlName="email" />
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" type="password" placeholder="Contraseña" formControlName="password" />
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" type="password" placeholder="Confirmar contraseña" formControlName="confirmPassword" />
+    </div>
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success w-100 rounded-3">
+            Registrarse
+        </button>
+    </div>
+</form>

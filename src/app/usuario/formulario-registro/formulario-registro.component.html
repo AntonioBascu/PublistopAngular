@@ -3,16 +3,49 @@
 </div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="mb-3">
-        <input class="form-control bg-body-secondary" placeholder="Nombre completo" formControlName="nombre" />
+        <input class="form-control bg-body-secondary" placeholder="Nombre completo" formControlName="userName" />
+        <div class="error-feedback" *ngIf="mostrarErrorValidacion('userName') && form.controls.userName.hasError('required')">
+            Por favor, introduce tu nombre.
+        </div>
     </div>
     <div class="mb-3">
         <input class="form-control bg-body-secondary" placeholder="Email" formControlName="email" />
+        <div class="error-feedback" *ngIf="mostrarErrorValidacion('email')">
+            <div *ngIf="form.controls.email.hasError('required')">
+                Por favor, introduce tu email.
+            </div>
+            <div *ngIf="form.controls.email.hasError('email')">
+                Por favor, introduce una dirección de email válida.
+            </div>
+        </div>
     </div>
     <div class="mb-3">
         <input class="form-control bg-body-secondary" type="password" placeholder="Contraseña" formControlName="password" />
+        <div class="error-feedback" *ngIf="mostrarErrorValidacion('password')">
+            <ng-container [ngSwitch]="form.controls.password.errors | primerErrorValidacion">
+                <div *ngSwitchCase="'required'">
+                    Por favor, introduce una contraseña.
+                </div>
+                <div *ngSwitchCase="'minlength'">
+                    Al menos de 8 caracteres.
+                </div>
+                <div *ngSwitchCase="'pattern'">
+                    Un caracter especial o más.
+                </div>
+                <div *ngSwitchCase="'sinNumero'">
+                    Al menos un dígito.
+                </div>
+                <div *ngSwitchCase="'sinMayuscula'">
+                    Al menos una mayúscula.
+                </div>
+            </ng-container>
+        </div>
     </div>
     <div class="mb-3">
-        <input class="form-control bg-body-secondary" type="password" placeholder="Confirmar contraseña" formControlName="confirmPassword" />
+        <input class="form-control bg-body-secondary" type="password" placeholder="Confirmar contraseña" formControlName="confirmarPassword" />
+        <div class="error-feedback" *ngIf="mostrarErrorValidacion('confirmarPassword') && form.controls.confirmarPassword.hasError('passwordNoCoincide')">
+            Las contraseñas no coinciden.
+        </div>
     </div>
     <div class="mt-4">
         <button type="submit" class="btn btn-success w-100 rounded-3">

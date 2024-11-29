@@ -15,6 +15,7 @@ import { ArticuloComponent } from './articulo/articulo.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { FormularioRegistroComponent } from './usuario/formulario-registro/formulario-registro.component';
 import { MenuComponent } from './layout/menu/menu.component';
+import { PrimerErrorValidacionPipe } from './shared/pipes/primer-error-validacion.pipe';
 
 //Angular material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -30,7 +31,8 @@ import { MatMenuModule } from '@angular/material/menu';
     ArticuloComponent,
     UsuarioComponent,
     FormularioRegistroComponent,
-    MenuComponent
+    MenuComponent,
+    PrimerErrorValidacionPipe
   ],
   imports: [
     BrowserModule,

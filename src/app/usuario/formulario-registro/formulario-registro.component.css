@@ -1,17 +1,6 @@
-form label {
-  text-transform: uppercase;
-  color: grey;
-}
-
-form input {
-  font-weight: 500;
-}
-
-form input::placeholder {
-  color: #c0bdbd;
-  font-weight: 300;
-}
-
-form.submitted input.ng-invalid {
-  border-color: red;
+.error-feedback {
+  font-size: 0.9rem;
+  color: crimson;
+  margin: 0.3rem !important;
+  margin-top: 0.1rem !important;
 }

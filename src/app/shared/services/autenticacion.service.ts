@@ -14,4 +14,7 @@ export class AutenticacionService {
     return this.http.post(this.url + '/signup', datosFormulario)
   }
 
+  iniciarSesion(datosFormulario: any) {
+    return this.http.post(this.url + '/signin', datosFormulario)
+  }
 }

@@ -14,7 +14,6 @@ export class FormularioRegistroComponent {
   public formBuilder = inject(FormBuilder);
   private formEnviado = false;
 
-
   //Validadores
   validadorCoincidenciaContraseña: ValidatorFn = (control: AbstractControl): null => {
     const password = control.get('password');
@@ -61,9 +60,26 @@ export class FormularioRegistroComponent {
               this.resetearFormulario()
               this.toastr.success('¡Usuario creado con éxito!', 'Creación de usuario')
             }
-            else console.log(res)
           },
-          error: err => console.log(err)
+          error: err => {
+            if (err.error.errors) {
+              err.error.errors.forEach((x: any) => {
+                switch (x.code) {
+                  case "DuplicateEmail":
+                    this.toastr.error('El email ya existe.', 'Creación de usuario')
+                    break
+                  case "DuplicateUserName":
+                    this.toastr.error('El nombre de usuario ya existe.', 'Creación de usuario')
+                    break;
+                  default:
+                    this.toastr.error('Error en la creación de cuenta.', 'Creación de usuario')
+                    break;
+                }
+              }
+              );
+            }
+            else console.log(err)
+          }
         })
     }
   }
@@ -71,7 +87,7 @@ export class FormularioRegistroComponent {
   mostrarErrorValidacion(nombreControl: string): boolean {
     const control = this.form.get(nombreControl);
 
-    return Boolean(control?.invalid) && (this.formEnviado || Boolean(control?.touched));
+    return Boolean(control?.invalid) && (this.formEnviado || Boolean(control?.dirty));
   }
 
   resetearFormulario() {

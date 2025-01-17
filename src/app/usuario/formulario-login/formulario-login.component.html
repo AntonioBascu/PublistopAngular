@@ -1,0 +1,28 @@
+<div class="mb-4">
+    <h2 class="text-success">
+        Inicia sesión
+    </h2>
+    <div>
+        ¿No tienes una cuenta?
+        <a routerLink="/usuario/registro" class="text-decoration-none fw-medium text-success d-inline-block">Regístrate</a>
+    </div>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="Nombre completo o email" formControlName="userNameOrEmail" />
+        <div class="error-feedback" *ngIf="mostrarErrorValidacion('userNameOrEmail') && form.controls.userNameOrEmail.hasError('required')">
+            Por favor, introduce tu nombre.
+        </div>
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="Contraseña" formControlName="password" />
+        <div class="error-feedback" *ngIf="mostrarErrorValidacion('password') && form.controls.password.hasError('required')">
+            Por favor, introduce una contraseña.
+        </div>
+    </div>
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success w-100 rounded-3">
+            Iniciar sesión
+        </button>
+    </div>
+</form>

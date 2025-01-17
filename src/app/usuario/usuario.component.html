@@ -2,10 +2,9 @@
 
     <div class="row mt-5 align-items-center">
         <div class="col-xxl-10 offset-xxl-1 col-lg-10 offset-lg-1 col-10 offset-1">
-
             <div class="rounded-4 border-0 shadow-lg bg-white" id="contenedorRegistro">
-                <div class="p-5 w-100">
-                    <app-registro />
+                <div class="p-5 w-100" [@opacidadRouter]="getUrl()">
+                    <router-outlet/>
                 </div>
             </div>
         </div>

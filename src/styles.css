@@ -10,3 +10,10 @@ body {
 .mouse-hover {
   cursor: pointer;
 }
+
+.error-feedback {
+  font-size: 0.9rem;
+  color: crimson;
+  margin: 0.3rem !important;
+  margin-top: 0.1rem !important;
+}

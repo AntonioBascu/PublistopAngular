@@ -9,13 +9,15 @@ import { ToastrModule } from 'ngx-toastr';
 //app
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MenuComponent } from './layout/menu/menu.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { ArticuloComponent } from './articulo/articulo.component';
 import { PagoComponent } from './pago/pago.component';
 import { FormularioPagoComponent } from './pago/formulario-pago/formulario-pago.component';
-import { ArticuloComponent } from './articulo/articulo.component';
-import { UsuarioComponent } from './usuario/usuario.component';
 import { FormularioRegistroComponent } from './usuario/formulario-registro/formulario-registro.component';
-import { MenuComponent } from './layout/menu/menu.component';
+import { FormularioLoginComponent } from './usuario/formulario-login/formulario-login.component';
 import { PrimerErrorValidacionPipe } from './shared/pipes/primer-error-validacion.pipe';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 //Angular material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -32,13 +34,15 @@ import { MatMenuModule } from '@angular/material/menu';
     UsuarioComponent,
     FormularioRegistroComponent,
     MenuComponent,
-    PrimerErrorValidacionPipe
+    PrimerErrorValidacionPipe,
+    FormularioLoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({ positionClass: 'toast-top-center' }),
     FormsModule,
     MatToolbarModule,
     MatButtonModule,

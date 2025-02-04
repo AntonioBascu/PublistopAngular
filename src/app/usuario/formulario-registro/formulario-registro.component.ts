@@ -1,18 +1,27 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidatorFn, Validators } from '@angular/forms';
 import { AutenticacionService } from '../../shared/services/autenticacion.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './formulario-registro.component.html',
   styleUrl: './formulario-registro.component.css'
 })
-export class FormularioRegistroComponent {
-  constructor(private servicioAutenticacion: AutenticacionService, private toastr: ToastrService) { }
+export class FormularioRegistroComponent implements OnInit {
+  constructor(
+    private servicioAutenticacion: AutenticacionService,
+    private toastr: ToastrService,
+    private router: Router) { }
 
   public formBuilder = inject(FormBuilder);
   private formEnviado = false;
+
+  ngOnInit(): void {
+    if (this.servicioAutenticacion.estaLogeado())
+      this.router.navigateByUrl('/dashboard')
+  }
 
   //Validadores
   validadorCoincidenciaContraseña: ValidatorFn = (control: AbstractControl): null => {
@@ -45,9 +54,9 @@ export class FormularioRegistroComponent {
   form = this.formBuilder.group({
     userName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/(?=.*[^a-zA-Z0-9 ])/)]],
+    password: ['', [Validators.required, Validators.minLength(8)/*, Validators.pattern(/(?=.*[^a-zA-Z0-9 ])/)*/]],
     confirmarPassword: ['']
-  }, { validators: [this.validadorCoincidenciaContraseña, this.validadorNumeroYMayuscula] })
+  }, { validators: [this.validadorCoincidenciaContraseña/*, this.validadorNumeroYMayuscula*/] })
 
   onSubmit() {
     this.formEnviado = true;

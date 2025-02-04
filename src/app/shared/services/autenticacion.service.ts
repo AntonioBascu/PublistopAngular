@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
+import { TOKEN_KEY } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,25 @@ export class AutenticacionService {
 
   iniciarSesion(datosFormulario: any) {
     return this.http.post(this.url + '/signin', datosFormulario)
+  }
+
+  estaLogeado()
+  {
+    return this.obtenerToken() != null ? true : false
+  }
+
+  eliminarToken()
+  {
+    localStorage.removeItem(TOKEN_KEY)
+  }
+
+  obtenerToken()
+  {
+    return localStorage.getItem(TOKEN_KEY)
+  }
+
+  guardarToken(token: string)
+  {
+    localStorage.setItem(TOKEN_KEY, token)
   }
 }

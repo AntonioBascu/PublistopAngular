@@ -1,5 +1,5 @@
-<mat-toolbar class="rounded-4" color="primary">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+<mat-toolbar class="rounded-4 w-100" color="primary">
+    <button *ngIf="autServicio.estaLogeado()" mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
     </button>
 
@@ -7,14 +7,36 @@
 
     <span class="spacer"></span>
 
-    <button mat-button routerLink="/usuario" routerLinkActive="active">
-        <mat-icon>person</mat-icon>
-        Usuario
-    </button>
+    <ng-container *ngIf="autServicio.estaLogeado()">
+        <div class="d-none d-md-flex align-items-center gap-1 gap-md-3 gap-lg-4">
+            <button mat-stroked-button (click)="cerrarSesion()">Logout</button>
+
+            <h6>Bienvenido {{this.nombreUsuario}}</h6>
+
+            <button mat-button routerLink="/usuario" routerLinkActive="active">
+                Perfil
+                <mat-icon>person</mat-icon>
+            </button>
+        </div>
+
+        <button mat-icon-button [matMenuTriggerFor]="usuario" class="d-md-none ms-auto">
+            <mat-icon>person</mat-icon>
+        </button>
+    </ng-container>
+
+
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/articulo" routerLinkActive="active">Articulos</button>
     <button mat-menu-item routerLink="/pagos" routerLinkActive="active">Pagos</button>
     <button mat-menu-item routerLink="/contact" routerLinkActive="active">Contacto</button>
+</mat-menu>
+
+<mat-menu #usuario="matMenu">
+    <label mat-menu-item>Bienvenido {{this.nombreUsuario}}</label>
+    <button mat-menu-item routerLink="/usuario" routerLinkActive="active">
+        Perfil
+    </button>
+    <button mat-menu-item (click)="cerrarSesion()">Logout</button>
 </mat-menu>

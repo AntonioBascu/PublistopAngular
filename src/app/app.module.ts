@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +18,7 @@ import { FormularioRegistroComponent } from './usuario/formulario-registro/formu
 import { FormularioLoginComponent } from './usuario/formulario-login/formulario-login.component';
 import { PrimerErrorValidacionPipe } from './shared/pipes/primer-error-validacion.pipe';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { autorizacionInterceptor } from './shared/autorizacion.interceptor';
 
 //Angular material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -48,9 +49,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule
   ],
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(withInterceptors([autorizacionInterceptor]))],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AutenticacionService } from '../../shared/services/autenticacion.service';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './formulario-login.component.html',
   styleUrl: './formulario-login.component.css'
 })
-export class FormularioLoginComponent {
+export class FormularioLoginComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
@@ -21,6 +21,11 @@ export class FormularioLoginComponent {
 
   private formBuilder = inject(FormBuilder)
   private formEnviado = false;
+
+  ngOnInit(): void {
+    if (this.servicioAutenticacion.estaLogeado())
+      this.router.navigateByUrl('/dashboard')
+  }
 
   form = this.formBuilder.group({
     userNameOrEmail: ['', Validators.required],
@@ -34,7 +39,7 @@ export class FormularioLoginComponent {
       this.servicioAutenticacion.iniciarSesion(this.form.value)
         .subscribe({
           next: (respuesta: any) => {
-            localStorage.setItem('token', respuesta.token)
+            this.servicioAutenticacion.guardarToken(respuesta.token)
 
             this.router.navigateByUrl('/dashboard');
             this.toastr.success('¡Usuario verificado con éxito!', 'Inicio de sesión correcto')

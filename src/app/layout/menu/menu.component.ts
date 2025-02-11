@@ -27,7 +27,7 @@ export class MenuComponent implements OnInit {
   cerrarSesion() {
     this.autServicio.eliminarToken()
 
-    this.router.navigateByUrl('/usuario/login');
+    this.router.navigateByUrl('/login');
   }
 
 }

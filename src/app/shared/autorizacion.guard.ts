@@ -7,6 +7,17 @@ export const autorizacionGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
 
   if (authService.estaLogeado()) {
+    const claimReq = route.data['claimReq'] as Function;
+
+    if (claimReq) {
+      const claims = authService.obtenerClaims();
+      if (!claimReq(claims)) {
+        router.navigateByUrl("/accesoDenegado")
+
+        return false;
+      }
+      return false;
+    }
     return true;
   }
   else

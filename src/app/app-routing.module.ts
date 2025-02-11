@@ -7,16 +7,32 @@ import { FormularioLoginComponent } from './usuario/formulario-login/formulario-
 import { FormularioRegistroComponent } from './usuario/formulario-registro/formulario-registro.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { autorizacionGuard } from './shared/autorizacion.guard';
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 const routes: Routes = [
-  { path: 'articulo', component: ArticuloComponent, canActivate: [autorizacionGuard] },
-  { path: '', redirectTo: '/usuario/login', pathMatch: 'full' },
-  { path: 'usuario', component: UsuarioComponent, children: [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {
+    path: '', component: UsuarioComponent,
+    children: [
       { path: 'login', component: FormularioLoginComponent },
       { path: 'registro', component: FormularioRegistroComponent }]
   },
-  { path: 'pagos', component: PagoComponent, canActivate: [autorizacionGuard] },
-  { path: 'dashboard', component: DashboardComponent }
+  {
+    path: '', component: MainLayoutComponent, canActivate: [autorizacionGuard],
+    canActivateChild: [autorizacionGuard],
+    children: [
+      {
+        path: 'dashboard', component: DashboardComponent
+      },
+      {
+        path: 'articulo', component: ArticuloComponent,
+        data: { claimReq: (claims: any) => claims.role == 'Admin' }
+      },
+      { path: 'pagos', component: PagoComponent },
+      { path: 'accesoDenegado', component: ForbiddenComponent }
+    ]
+  },
 ];
 
 @NgModule({

@@ -38,4 +38,9 @@ export class AutenticacionService {
   {
     localStorage.setItem(TOKEN_KEY, token)
   }
+
+  obtenerClaims()
+  {
+    return JSON.parse(atob(this.obtenerToken()!.split('.')[1]))
+  }
 }

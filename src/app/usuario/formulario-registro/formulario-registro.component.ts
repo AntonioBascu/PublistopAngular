@@ -20,7 +20,7 @@ export class FormularioRegistroComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.servicioAutenticacion.estaLogeado())
-      this.router.navigateByUrl('/dashboard')
+      this.router.navigateByUrl('/pedidos')
   }
 
   //Validadores

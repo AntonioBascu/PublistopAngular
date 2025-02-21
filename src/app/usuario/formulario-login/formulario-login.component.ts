@@ -23,8 +23,8 @@ export class FormularioLoginComponent implements OnInit {
   private formEnviado = false;
 
   ngOnInit(): void {
-    if (this.servicioAutenticacion.estaLogeado())
-      this.router.navigateByUrl('/dashboard')
+    //if (this.servicioAutenticacion.estaLogeado())
+      this.router.navigateByUrl('/pedidos')
   }
 
   form = this.formBuilder.group({
@@ -41,7 +41,7 @@ export class FormularioLoginComponent implements OnInit {
           next: (respuesta: any) => {
             this.servicioAutenticacion.guardarToken(respuesta.token)
 
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/pedidos');
             this.toastr.success('¡Usuario verificado con éxito!', 'Inicio de sesión correcto')
           },
           error: err => {

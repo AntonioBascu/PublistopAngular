@@ -16,13 +16,13 @@ export const autorizacionGuard: CanActivateFn = (route, state) => {
 
         return false;
       }
-      return false;
+      return true;
     }
     return true;
   }
   else
   {
-    router.navigateByUrl("/usuario/login")
+    router.navigateByUrl("/login")
 
     return false;
   }

@@ -6,7 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
-//app
+//Angular material
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+
+//App
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './layout/menu/menu.component';
@@ -17,16 +23,11 @@ import { FormularioPagoComponent } from './pago/formulario-pago/formulario-pago.
 import { FormularioRegistroComponent } from './usuario/formulario-registro/formulario-registro.component';
 import { FormularioLoginComponent } from './usuario/formulario-login/formulario-login.component';
 import { PrimerErrorValidacionPipe } from './shared/pipes/primer-error-validacion.pipe';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { autorizacionInterceptor } from './shared/autorizacion.interceptor';
-
-//Angular material
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
+import { OcultarSiNoTieneClaimsDirective } from './shared/directives/ocultar-si-no-tiene-claims.directive';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 @NgModule({
   declarations: [
@@ -39,9 +40,10 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     MenuComponent,
     PrimerErrorValidacionPipe,
     FormularioLoginComponent,
-    DashboardComponent,
     MainLayoutComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    OcultarSiNoTieneClaimsDirective,
+    PedidosComponent
   ],
   imports: [
     BrowserModule,

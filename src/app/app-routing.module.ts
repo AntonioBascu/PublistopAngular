@@ -5,10 +5,11 @@ import { PagoComponent } from './pago/pago.component';
 import { ArticuloComponent } from './articulo/articulo.component';
 import { FormularioLoginComponent } from './usuario/formulario-login/formulario-login.component';
 import { FormularioRegistroComponent } from './usuario/formulario-registro/formulario-registro.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { autorizacionGuard } from './shared/autorizacion.guard';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { claimsReq } from './shared/utilities/claimsReq';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,13 +24,17 @@ const routes: Routes = [
     canActivateChild: [autorizacionGuard],
     children: [
       {
-        path: 'dashboard', component: DashboardComponent
+        path: 'pedidos', component: PedidosComponent,
+        data: { claimReq: claimsReq.Taller }
       },
       {
         path: 'articulo', component: ArticuloComponent,
-        data: { claimReq: (claims: any) => claims.role == 'Admin' }
+        data: { claimReq: claimsReq.Admin }
       },
-      { path: 'pagos', component: PagoComponent },
+      {
+        path: 'pagos', component: PagoComponent,
+        data: { claimReq: claimsReq.Oficina }
+      },
       { path: 'accesoDenegado', component: ForbiddenComponent }
     ]
   },

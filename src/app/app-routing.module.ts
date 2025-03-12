@@ -20,8 +20,8 @@ const routes: Routes = [
       { path: 'registro', component: FormularioRegistroComponent }]
   },
   {
-    path: '', component: MainLayoutComponent, canActivate: [autorizacionGuard],
-    canActivateChild: [autorizacionGuard],
+    path: '', component: MainLayoutComponent, //canActivate: [autorizacionGuard],
+    //canActivateChild: [autorizacionGuard],
     children: [
       {
         path: 'pedidos', component: PedidosComponent,

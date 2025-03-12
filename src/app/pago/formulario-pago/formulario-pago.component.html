@@ -1,12 +1,12 @@
 <form #form="ngForm" (submit)="onSubmit(form)" [class.submitted]="this.enviado">
     <div class="mb-3">
-        <input type="hidden" name="id" [value]="service.DatosFormulario.id" />
+        <input type="hidden" name="id" [value]="servicio.DatosFormulario.id" />
         <label>Nombre del propietario de la tarjeta</label>
         <input class="form-control form-control-lg"
                placeholder="Nombre en la tarjeta"
                #nombrePropietarioTarjeta="ngModel"
                name="nombrePropietarioTarjeta"
-               [(ngModel)]="service.DatosFormulario.nombrePropietarioTarjeta" required/>
+               [(ngModel)]="servicio.DatosFormulario.nombrePropietarioTarjeta" required/>
     </div>
     <div class="mb-3">
         <label>Numero de tarjeta</label>
@@ -14,7 +14,7 @@
                placeholder="Numero de tarjeta de 16 dígitos"
                #numeroTarjeta="ngModel"
                name="numeroTarjeta"
-               [(ngModel)]="service.DatosFormulario.numeroTarjeta" maxlength="16" minlength="16" required/>
+               [(ngModel)]="servicio.DatosFormulario.numeroTarjeta" maxlength="16" minlength="16" required/>
     </div>
     <div class="row">
         <div class="mb-3 col-6">
@@ -24,7 +24,7 @@
                    placeholder="CVV"
                    #codigoSeguridad="ngModel"
                    name="codigoSeguridad"
-                   [(ngModel)]="service.DatosFormulario.codigoSeguridad" maxlength="3" minlength="3" required/>
+                   [(ngModel)]="servicio.DatosFormulario.codigoSeguridad" maxlength="3" minlength="3" required/>
         </div>
         <div class="mb-3 col-6">
             <label>Válido hasta</label>
@@ -32,7 +32,7 @@
                    placeholder="MM/YY"
                    #fechaCaducidad="ngModel"
                    name="fechaCaducidad"
-                   [(ngModel)]="service.DatosFormulario.fechaCaducidad" maxlength="5" minlength="5" required/>
+                   [(ngModel)]="servicio.DatosFormulario.fechaCaducidad" maxlength="5" minlength="5" required/>
         </div>
         <div class="d-grid">
             <button class="btn btn-lg btn-success" type="submit">Confirmar</button>

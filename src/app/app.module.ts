@@ -6,12 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
-//Angular material
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-
 //App
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,10 +45,6 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot({ positionClass: 'toast-top-center' }),
     FormsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
     ReactiveFormsModule
   ],
   providers: [provideHttpClient(withInterceptors([autorizacionInterceptor]))],

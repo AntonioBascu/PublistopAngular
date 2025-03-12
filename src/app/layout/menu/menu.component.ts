@@ -13,7 +13,7 @@ export class MenuComponent implements OnInit {
     public autServicio: AutenticacionService,
     private usuarioServicio: UsuarioService) { }
 
-  nombreUsuario: string = ''
+  nombreUsuario: string = '';
 
   ngOnInit(): void {
     if (this.autServicio.estaLogeado()) {

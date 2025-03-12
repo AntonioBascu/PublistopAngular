@@ -9,7 +9,7 @@ import { TOKEN_KEY } from '../constants';
 export class AutenticacionService {
   constructor(private http: HttpClient) { }
 
-  url: string = environment.apiUrl
+  url: string = environment.apiUrl;
 
   crearUsuario(datosFormulario: any) {
     return this.http.post(this.url + '/signup', datosFormulario)

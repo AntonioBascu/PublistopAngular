@@ -13,13 +13,13 @@ export class FormularioPagoComponent {
 
   enviado: Boolean = false;
 
-  constructor(public service: PagoService, private toastr: ToastrService) { }
+  constructor(public servicio: PagoService, private toastr: ToastrService) { }
 
   onSubmit(form: NgForm) {
 
     this.enviado = true;
     if (form.valid) {
-      if (this.service.DatosFormulario.id == 0)
+      if (this.servicio.DatosFormulario.id == 0)
         this.insertarDatos(form)
       else
         this.actualizarDatos(form)
@@ -27,10 +27,10 @@ export class FormularioPagoComponent {
   }
 
   insertarDatos(form: NgForm) {
-    this.service.postPago()
+    this.servicio.postPago()
       .subscribe({
         next: res => {
-          this.service.pagos = res as Pago[];
+          this.servicio.pagos = res as Pago[];
           this.resetearFormulario(form);
           this.toastr.success('¡Pago creado con éxito!', 'Registro de pagos');
         },
@@ -39,10 +39,10 @@ export class FormularioPagoComponent {
   }
 
   actualizarDatos(form: NgForm) {
-    this.service.putPago()
+    this.servicio.putPago()
       .subscribe({
         next: res => {
-          this.service.pagos = res as Pago[];
+          this.servicio.pagos = res as Pago[];
           this.resetearFormulario(form);
           this.toastr.info('¡Pago actualizado con éxito!', 'Registro de pagos');
         },
@@ -52,7 +52,7 @@ export class FormularioPagoComponent {
 
   resetearFormulario(form: NgForm) {
     form.form.reset();
-    this.service.DatosFormulario = new Pago();
+    this.servicio.DatosFormulario = new Pago();
     this.enviado = false;
   }
 }

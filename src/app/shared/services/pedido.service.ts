@@ -13,4 +13,17 @@ export class PedidoService {
   getPedidos() {
     return this.http.get(this.url + '/pedidos')
   }
+
+  getPedido(id: number) {
+    return this.http.get(this.url + '/pedidos/' + id)
+  }
+
+  putPedido(id: number, datosFormulario: any) {
+    return this.http.put(this.url + '/pedidos/' + id, datosFormulario)
+  }
+
+  postPedido(datosFormulario: any) {
+    return this.http.post(this.url + '/pedidos', datosFormulario)
+  }
+
 }

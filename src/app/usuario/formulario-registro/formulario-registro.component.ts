@@ -84,8 +84,7 @@ export class FormularioRegistroComponent implements OnInit {
                     this.toastr.error('Error en la creación de cuenta.', 'Creación de usuario')
                     break;
                 }
-              }
-              );
+              });
             }
             else console.log(err)
           }
@@ -96,7 +95,7 @@ export class FormularioRegistroComponent implements OnInit {
   mostrarErrorValidacion(nombreControl: string): boolean {
     const control = this.form.get(nombreControl);
 
-    return Boolean(control?.invalid) && (this.formEnviado || Boolean(control?.dirty));
+    return Boolean(control?.invalid) && (this.formEnviado || Boolean(control?.touched));
   }
 
   resetearFormulario() {

@@ -23,7 +23,7 @@ export class FormularioLoginComponent implements OnInit {
   private formEnviado = false;
 
   ngOnInit(): void {
-    //if (this.servicioAutenticacion.estaLogeado())
+    if (this.servicioAutenticacion.estaLogeado())
       this.router.navigateByUrl('/pedidos')
   }
 

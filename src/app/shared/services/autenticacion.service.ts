@@ -43,4 +43,10 @@ export class AutenticacionService {
   {
     return JSON.parse(atob(this.obtenerToken()!.split('.')[1]))
   }
+
+  tienePermisos(role: string): boolean {
+    const claims = this.obtenerClaims();
+
+    return claims.includes(role)
+  }
 }

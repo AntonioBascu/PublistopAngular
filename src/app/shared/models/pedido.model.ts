@@ -1,7 +1,9 @@
+import { LineaPedido } from "./lineaPedido.model"
+
 export class Pedido {
   id: number = 0
   cliente: string = ""
   estado: string = "" 
-  //EntregaMax: Date = new Date()
-  vendedor: string = ""
+  entregaMax: Date = new Date()
+  lineasPedido: LineaPedido[] = []
 }

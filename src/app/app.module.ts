@@ -22,6 +22,7 @@ import { OcultarSiNoTieneClaimsDirective } from './shared/directives/ocultar-si-
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { FormularioPedidoComponent } from './pedidos/formulario-pedido/formulario-pedido.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     MainLayoutComponent,
     ForbiddenComponent,
     OcultarSiNoTieneClaimsDirective,
-    PedidosComponent
+    PedidosComponent,
+    FormularioPedidoComponent
   ],
   imports: [
     BrowserModule,

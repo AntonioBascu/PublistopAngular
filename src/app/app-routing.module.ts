@@ -10,6 +10,7 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { claimsReq } from './shared/utilities/claimsReq';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { FormularioPedidoComponent } from './pedidos/formulario-pedido/formulario-pedido.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,11 +21,15 @@ const routes: Routes = [
       { path: 'registro', component: FormularioRegistroComponent }]
   },
   {
-    path: '', component: MainLayoutComponent, //canActivate: [autorizacionGuard],
-    //canActivateChild: [autorizacionGuard],
+    path: '', component: MainLayoutComponent, canActivate: [autorizacionGuard],
+    canActivateChild: [autorizacionGuard],
     children: [
       {
         path: 'pedidos', component: PedidosComponent,
+        data: { claimReq: claimsReq.Taller }
+      },
+      {
+        path: 'crearPedido/:id', component: FormularioPedidoComponent,
         data: { claimReq: claimsReq.Taller }
       },
       {
@@ -41,7 +46,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

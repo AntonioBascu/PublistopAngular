@@ -35,7 +35,7 @@
                             </div>
                         </a>
                     </td>
-                    <td><a [routerLink]="['/crearPedido', pedido.id]" class="d-block text-decoration-none text-dark">{{ pedido.estado }}</a></td>
+                    <td><a [routerLink]="['/crearPedido', pedido.id]" class="d-block text-decoration-none text-dark">{{ obtenerEstado(pedido.estado) }}</a></td>
                     <td><a [routerLink]="['/crearPedido', pedido.id]" class="d-block text-decoration-none text-dark">{{ pedido.entregaMax ? (pedido.entregaMax | date:'dd/MM/yyyy') : '-' }}</a></td>
                 </tr>
             </tbody>

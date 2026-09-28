@@ -36,10 +36,10 @@ const routes: Routes = [
         path: 'articulo', component: ArticuloComponent,
         data: { claimReq: claimsReq.Admin }
       },
-      {
-        path: 'pagos', component: PagoComponent,
-        data: { claimReq: claimsReq.Oficina }
-      },
+      //{
+      //  path: 'pagos', component: PagoComponent,
+      //  data: { claimReq: claimsReq.Oficina }
+      //},
       { path: 'accesoDenegado', component: ForbiddenComponent }
     ]
   },

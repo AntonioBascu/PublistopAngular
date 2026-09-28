@@ -3,8 +3,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PedidoService } from '../../shared/services/pedido.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Estado } from '../../shared/enums/estado.enum';
 import { Pedido } from '../../shared/models/pedido.model';
-import { not } from 'rxjs/internal/util/not';
 
 @Component({
   selector: 'app-formulario-pedido',
@@ -20,34 +20,32 @@ export class FormularioPedidoComponent {
 
   @Input() id = -1;
 
+  pedido: Pedido = new Pedido
+
   ngOnInit() {
     if (this.id != -1) {
       this.servicioPedidos.getPedido(Number(this.id))
         .subscribe({
           next: res => {
-            this.pedidoForm = this.crearPedido(res)
+            this.pedido = res as Pedido
 
-            console.log(res)
-            //let pedido = res as Pedido;
-            //this.pedidoForm.patchValue({
-            //  cliente: pedido.cliente,
-            //  entregaMax: pedido.EntregaMax,
-            //  lineasPedido: pedido.LineasPedido
-            //})
+            this.pedidoForm = this.crearFormularioPedido(this.pedido)
           },
           error: err => { console.log(err) }
         })
     }
   }
 
+  // Crear pedido
   private formBuilder = inject(FormBuilder);
 
-  pedidoForm = this.crearPedido()
+  pedidoForm = this.crearFormularioPedido()
 
-  crearPedido(pedido?: any): FormGroup {
+  crearFormularioPedido(pedido?: any): FormGroup {
     return this.formBuilder.group({
       cliente: [pedido?.cliente ?? '', Validators.required],
       entregaMax: [pedido?.entregaMax ? pedido?.entregaMax.split('T')[0] : null],
+      estado: [pedido?.estado ?? ''],
       lineasPedido: this.formBuilder.array(
         pedido?.lineasPedido && pedido.lineasPedido.length > 0 ?
           pedido.lineasPedido.map((linea: any) => this.crearLineaPedido(linea))
@@ -92,6 +90,7 @@ export class FormularioPedidoComponent {
     }
   }
 
+  // Enviar y recibir datos
   onSubmit(): void {
     if (this.pedidoForm.valid) {
 
@@ -122,6 +121,8 @@ export class FormularioPedidoComponent {
   }
 
   post(datosFormulario: any) {
+    datosFormulario.estado = 0;
+
     this.servicioPedidos.postPedido(datosFormulario).subscribe({
       next: (res: any) => {
         this.router.navigateByUrl('/pedidos');
@@ -133,5 +134,32 @@ export class FormularioPedidoComponent {
         this.toastr.error('Error creando el pedido', 'Creación de pedido')
       }
     })
+  }
+
+  //Estado
+  avanzarEstado() {
+    this.servicioPedidos.putEstadoPedido(this.id, this.pedido.estado + 1).subscribe({
+      next: (res: any) => {
+        this.pedido = res as Pedido
+
+        this.pedidoForm = this.crearFormularioPedido(this.pedido)
+
+        this.toastr.success('¡Pedido editado con éxito!', 'Edición de pedido')
+      },
+      error: err => {
+        console.log(err)
+
+        this.router.navigateByUrl('/pedidos');
+        this.toastr.error('¡Error editando el pedido', 'Edición de pedido')
+      }
+    })
+  }
+
+  obtenerEstado() {
+    return Estado[this.pedido.estado];
+  }
+
+  obtenerSiguienteEstado() {
+    return Estado[this.pedido.estado + 1];
   }
 }

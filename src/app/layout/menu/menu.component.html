@@ -6,20 +6,20 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand">Publistop</a>
+        <a class="navbar-brand text-danger">Publistop</a>
 
         <!-- Elementos de navegación -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link">Inicio</a>
+                    <a class="nav-link" routerLink="/" routerLinkActive="active">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/articulo" routerLinkActive="active">Articulos</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" routerLink="/pagos" routerLinkActive="active">Pagos</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/pedidos" routerLinkActive="active">Pedidos</a>
                 </li>
@@ -28,7 +28,7 @@
             <!-- Botón de usuario -->
             <ul class="navbar-nav d-flex align-items-center">
                 <li class="nav-item">
-                    <a class="btn nav-link text-danger" (click)="cerrarSesion()">Logout</a>
+                    <a class="btn nav-link text-warning" (click)="cerrarSesion()">Logout</a>
                 </li>
                 <li class="nav-item mx-3">
                     <span class="navbar-text">

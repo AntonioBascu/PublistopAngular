@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PedidoService } from '../shared/services/pedido.service';
 import { Pedido } from '../shared/models/pedido.model';
+import { Estado } from '../shared/enums/estado.enum';
 
 @Component({
   selector: 'app-pedidos',
@@ -25,9 +26,13 @@ export class PedidosComponent {
       })
   }
 
+  obtenerEstado(id: number) {
+    return Estado[id];
+  }
+
   aplicarFiltro() {
 
-    if (!this.filtro.trim()) return;
+    //if (!this.filtro.trim()) return;
 
     const filtroLower = this.filtro.toLowerCase();
 
@@ -41,8 +46,5 @@ export class PedidosComponent {
         l.cantidad?.toString() == (this.filtro)
       ))
     );
-
-    console.log(this.pedidos);
-    console.log(this.pedidosFiltrados);
   }
 }

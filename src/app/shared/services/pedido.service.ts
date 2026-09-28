@@ -22,6 +22,10 @@ export class PedidoService {
     return this.http.put(this.url + '/pedidos/' + id, datosFormulario)
   }
 
+  putEstadoPedido(id: number, estado: number) {
+    return this.http.put(this.url + '/pedidos/Estado/' + id, estado)
+  }
+
   postPedido(datosFormulario: any) {
     return this.http.post(this.url + '/pedidos', datosFormulario)
   }

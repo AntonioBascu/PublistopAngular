@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'https://localhost:7131/api'
+  apiUrl: 'https://gestionpedidosapi20260314192726-hdf7ddf9fuejhffb.francecentral-01.azurewebsites.net'
 };

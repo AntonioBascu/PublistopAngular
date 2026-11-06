@@ -1,63 +1,141 @@
-<div class="row px-5 pt-4">
-    <div class="col-6">
-        <h3>Nuevo Pedido</h3>
+<div class="pedido-container">
+  <!-- Header con estado -->
+  <div class="pedido-header">
+    <div class="header-titulo">
+      <h3 class="mb-0">{{ id === -1 ? 'Nuevo Pedido' : 'Editar Pedido' }}</h3>
     </div>
-    <div class="col-1">
-        <h3>Estado: </h3>
+    <div class="header-estado">
+      <div class="estado-info">
+        <small class="text-muted">Estado</small>
+        <h5 class="text-success mb-0">{{ obtenerEstado() }}</h5>
+      </div>
+      <button type="button" 
+              class="btn btn-success btn-avanzar" 
+              (click)="avanzarEstado()"
+              [disabled]="id === -1">
+        <span class="d-none d-md-inline">Avanzar a</span>
+        <span class="ms-1">{{ obtenerSiguienteEstado() }}</span>
+      </button>
     </div>
-    <div class="col-2">
-        <h3 class="text-success">{{ obtenerEstado() }}</h3>
-    </div>
-    <div class="col-3">
-        <button type="button" class="btn btn-success w-100 rounded-3" (click)="avanzarEstado()">Avanzar a {{ obtenerSiguienteEstado() }}</button>
-    </div>
-    <form [formGroup]="pedidoForm" (ngSubmit)="onSubmit()" class="mt-3">
-        <div class="mb-3">
-            <input class="form-control bg-body-secondary" placeholder="Nombre cliente" formControlName="cliente" />
-            <div class="error-feedback" *ngIf="esInvalido('cliente')">
-                El cliente es obligatorio
-            </div>
+  </div>
+
+  <!-- Formulario -->
+  <form [formGroup]="pedidoForm" (ngSubmit)="onSubmit()" class="pedido-form">
+    <!-- Sección: Datos principales -->
+    <section class="form-section">
+      <h5 class="section-title">Información del pedido</h5>
+      
+      <div class="row g-3">
+        <div class="col-12 col-md-6">
+          <label for="cliente" class="form-label">Cliente *</label>
+          <input type="text"
+                 id="cliente"
+                 class="form-control bg-body-secondary"
+                 placeholder="Nombre cliente"
+                 formControlName="cliente"
+                 [class.is-invalid]="esInvalido('cliente')" />
+          <div class="invalid-feedback" *ngIf="esInvalido('cliente')">
+            El cliente es obligatorio
+          </div>
         </div>
-        <div class="mb-3">
-            <input type="date" class="form-control bg-body-secondary" placeholder="Fecha máxima de entrega" formControlName="entregaMax" />
+
+        <div class="col-12 col-md-6">
+          <label for="entregaMax" class="form-label">Fecha máxima de entrega</label>
+          <input type="date"
+                 id="entregaMax"
+                 class="form-control bg-body-secondary"
+                 formControlName="entregaMax" />
         </div>
-        <div class="row my-5">
-            <div class="col-3">
-                <h4>Lineas del pedido</h4>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-primary w-100" (click)="agregarLineaPedido()">Agregar</button>
-            </div>
-            <div formArrayName="lineasPedido">
-                <div *ngFor="let linea of lineasPedido.controls; let i = index" [formGroupName]="i" class="row mt-3">
-                    <div class="col-4">
-                        <input class="form-control bg-body-secondary" placeholder="Articulo" formControlName="articulo" />
-                        <div class="error-feedback" *ngIf="esInvalido('articulo', i)">
-                            El articulo es obligatorio.
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <input type="number" class="form-control bg-body-secondary" placeholder="Cantidad" formControlName="cantidad" />
-                        <div *ngIf="esInvalido('cantidad', i)" class="error-feedback">
-                            La cantidad es obligatoria.
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <input class="form-control bg-body-secondary" placeholder="Color tinta" formControlName="tinta" />
-                    </div>
-                    <div class="col-3">
-                        <input class="form-control bg-body-secondary" placeholder="Situación de la grabación" formControlName="situacionGrabacion" />
-                    </div>
-                    <div class="col-1">
-                        <button type="button" class="btn btn-danger w-100" (click)="eliminarLineaPedido(i)">Eliminar</button>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </section>
+
+    <!-- Sección: Líneas del pedido -->
+    <section class="form-section">
+      <div class="section-header">
+        <h5 class="section-title mb-0">Líneas del pedido</h5>
+        <button type="button"
+                class="btn btn-primary btn-sm"
+                (click)="agregarLineaPedido()">
+          <i class="bi bi-plus-lg"></i> Agregar línea
+        </button>
+      </div>
+
+      <div formArrayName="lineasPedido" class="lineas-container">
+        <div *ngIf="lineasPedido.length === 0" class="alert alert-info">
+          No hay líneas agregadas. Haz clic en "Agregar línea" para comenzar.
         </div>
-        <div class="mt-4">
-            <button type="submit" class="btn btn-success w-100 rounded-3">
-                {{ this.id == -1 ? 'Crear Pedido' : 'Actualizar Pedido' }}
+
+        <div *ngFor="let linea of lineasPedido.controls; let i = index"
+             [formGroupName]="i"
+             class="linea-pedido">
+          
+          <div class="linea-header">
+            <h6 class="mb-0">Línea {{ i + 1 }}</h6>
+            <button type="button"
+                    class="btn btn-danger btn-sm"
+                    (click)="eliminarLineaPedido(i)"
+                    [disabled]="lineasPedido.length === 1">
+              <i class="bi bi-trash"></i>
             </button>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-12 col-sm-6 col-lg-4">
+              <label [for]="'articulo-' + i" class="form-label">Artículo *</label>
+              <input type="text"
+                     [id]="'articulo-' + i"
+                     class="form-control bg-body-secondary"
+                     placeholder="Nombre artículo"
+                     formControlName="articulo"
+                     [class.is-invalid]="esInvalido('articulo', i)" />
+              <div class="invalid-feedback" *ngIf="esInvalido('articulo', i)">
+                El artículo es obligatorio
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-2">
+              <label [for]="'cantidad-' + i" class="form-label">Cantidad *</label>
+              <input type="number"
+                     [id]="'cantidad-' + i"
+                     class="form-control bg-body-secondary"
+                     placeholder="0"
+                     formControlName="cantidad"
+                     min="1"
+                     [class.is-invalid]="esInvalido('cantidad', i)" />
+              <div class="invalid-feedback" *ngIf="esInvalido('cantidad', i)">
+                La cantidad es obligatoria
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3">
+              <label [for]="'tinta-' + i" class="form-label">Color tinta</label>
+              <input type="text"
+                     [id]="'tinta-' + i"
+                     class="form-control bg-body-secondary"
+                     placeholder="Ej: Rojo, Azul"
+                     formControlName="tinta" />
+            </div>
+
+            <div class="col-12 col-lg-3">
+              <label [for]="'grabacion-' + i" class="form-label">Situación grabación</label>
+              <input type="text"
+                     [id]="'grabacion-' + i"
+                     class="form-control bg-body-secondary"
+                     placeholder="Estado"
+                     formControlName="situacionGrabacion" />
+            </div>
+          </div>
         </div>
-    </form>
+      </div>
+    </section>
+
+    <!-- Botones de acción -->
+    <div class="form-actions">
+      <button type="submit"
+              class="btn btn-success btn-lg w-100 rounded-3"
+              [disabled]="!pedidoForm.valid">
+        {{ id === -1 ? 'Crear Pedido' : 'Actualizar Pedido' }}
+      </button>
+    </div>
+  </form>
 </div>
